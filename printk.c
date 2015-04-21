@@ -245,7 +245,7 @@ static inline int normalize_flags(int flags)
  *   3. write out the fill chars, the alternative prefix, the sign char, and
  *      the number that is stored in the local buffer to the output buffer.
  */
-#define FMT_FUNCTION(fmt,SIGNED,BASE,type,utype,altpfx,EXTRAFLAGS) \
+#define FMT_FUNCTION(fmt,SIGNED,BASE,type,utype,ALTPFX,EXTRAFLAGS) \
 	static void format_ ##fmt (buf_t *buf, type val, int flags, int width, int prec) \
 	{ \
 		/* normalize the flags, and apply the default precision */ \
@@ -287,7 +287,7 @@ static inline int normalize_flags(int flags)
 			if ((flags & FLAG_PREC) && numlen < prec) \
 				nfill = (width - prec); \
 			if (flags & FLAG_ALTERNATIVE) \
-				nfill -= strlen(altpfx); \
+				nfill -= strlen(ALTPFX); \
 			if (negative || (flags & FLAG_SPACE) || (flags & FLAG_PLUS)) \
 				nfill--; \
 			if (nfill < 0) \
@@ -309,9 +309,7 @@ static inline int normalize_flags(int flags)
 		\
 		/* print alternative prefix */ \
 		if ((flags & FLAG_ALTERNATIVE) && (BASE != 8 || (numlen >= prec))) { \
-			char *altpfx_iter = altpfx; \
-			while (*altpfx_iter) \
-				push(buf, *altpfx_iter++); \
+			pushall(buf, ALTPFX, strlen(ALTPFX)); \
 		} \
 		if (flags & FLAG_ZERO) { \
 			/* when the padding character is '0', it must be applied _after_ */ \
