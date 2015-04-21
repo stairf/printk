@@ -209,6 +209,18 @@ printf("w+p: %*.*x\n", 15, 10, 0x5);
 printf("alt: %#x %#x %#x %#x %#x\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("alt: %#X %#X %#X %#X %#X\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("alt: %#o %#o %#o %#o %#o\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("alt: %#lx %#lx %#lx %#lx %#lx\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("alt: %#lX %#lX %#lX %#lX %#lX\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("alt: %#lo %#lo %#lo %#lo %#lo\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("alt: %#llx %#llx %#llx %#llx %#llx\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("alt: %#llX %#llX %#llX %#llX %#llX\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("alt: %#llo %#llo %#llo %#llo %#llo\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("alt: %#zx %#zx %#zx %#zx\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("alt: %#zX %#zX %#zX %#zX\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("alt: %#zo %#zo %#zo %#zo\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("alt: %#jx %#jx %#jx %#jx\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX);
+printf("alt: %#jX %#jX %#jX %#jX\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX);
+printf("alt: %#jo %#jo %#jo %#jo\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX);
 
 /* dash flag */
 printf("dash: %-d %-d %-d %-d %-d %-d %-d\n", 0, 1, -1, -123, 123, INT_MAX, INT_MIN);
@@ -217,6 +229,30 @@ printf("dash: %-x %-x %-x %-x %-x\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("dash: %-X %-X %-X %-X %-X\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("dash: %-o %-o %-o %-o %-o\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("dash: %-u %-u %-u %-u %-u\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("dash: %-ld %-ld %-ld %-ld %-ld %-ld %-ld\n", 0L, 1L, -1L, -123L, 123L, LONG_MAX, LONG_MIN);
+printf("dash: %-li %-li %-li %-li %-li %-li %-li\n", 0L, 1L, -1L, -123L, 123L, LONG_MAX, LONG_MIN);
+printf("dash: %-lx %-lx %-lx %-lx %-lx\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("dash: %-lX %-lX %-lX %-lX %-lX\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("dash: %-lo %-lo %-lo %-lo %-lo\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("dash: %-lu %-lu %-lu %-lu %-lu\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("dash: %-lld %-lld %-lld %-lld %-lld %-lld %-lld\n", 0LL, 1LL, -1LL, -123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("dash: %-lli %-lli %-lli %-lli %-lli %-lli %-lli\n", 0LL, 1LL, -1LL, -123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("dash: %-llx %-llx %-llx %-llx %-llx\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("dash: %-llX %-llX %-llX %-llX %-llX\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("dash: %-llo %-llo %-llo %-llo %-llo\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("dash: %-llu %-llu %-llu %-llu %-llu\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("dash: %-zd %-zd %-zd %-zd %-zd\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) -123, (ssize_t) 123);
+printf("dash: %-zi %-zi %-zi %-zi %-zi\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) -123, (ssize_t) 123);
+printf("dash: %-zx %-zx %-zx %-zx\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("dash: %-zX %-zX %-zX %-zX\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("dash: %-zo %-zo %-zo %-zo\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("dash: %-zu %-zu %-zu %-zu\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("dash: %-jd %-jd %-jd %-jd %-jd %-jd %-jd\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) -123, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) INTMAX_MIN) ;
+printf("dash: %-ji %-ji %-ji %-ji %-ji %-ji %-ji\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) -123, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) INTMAX_MIN) ;
+printf("dash: %-jx %-jx %-jx %-jx %-jx\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX) ;
+printf("dash: %-jX %-jX %-jX %-jX %-jX\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX) ;
+printf("dash: %-jo %-jo %-jo %-jo %-jo\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX) ;
+printf("dash: %-ju %-ju %-ju %-ju %-ju\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX) ;
 
 /* zero flag */
 printf("zero: %0d %0d %0d %0d %0d %0d %0d\n", 0, 1, -1, -123, 123, INT_MAX, INT_MIN);
@@ -224,28 +260,97 @@ printf("zero: %0i %0i %0i %0i %0i %0i %0i\n", 0, 1, -1, -123, 123, INT_MAX, INT_
 printf("zero: %0x %0x %0x %0x %0x\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("zero: %0X %0X %0X %0X %0X\n", 0, 1, 123, INT_MAX, UINT_MAX);
 printf("zero: %0o %0o %0o %0o %0o\n", 0, 1, 123, INT_MAX, UINT_MAX);
-printf("zeru: %0u %0u %0u %0u %0u\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("zero: %0u %0u %0u %0u %0u\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("zero: %0ld %0ld %0ld %0ld %0ld %0ld %0ld\n", 0L, 1L, -1L, -123L, 123L, LONG_MAX, LONG_MIN);
+printf("zero: %0li %0li %0li %0li %0li %0li %0li\n", 0L, 1L, -1L, -123L, 123L, LONG_MAX, LONG_MIN);
+printf("zero: %0lx %0lx %0lx %0lx %0lx\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("zero: %0lX %0lX %0lX %0lX %0lX\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("zero: %0lo %0lo %0lo %0lo %0lo\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("zero: %0lu %0lu %0lu %0lu %0lu\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("zero: %0lld %0lld %0lld %0lld %0lld %0lld %0lld\n", 0LL, 1LL, -1LL, -123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("zero: %0lli %0lli %0lli %0lli %0lli %0lli %0lli\n", 0LL, 1LL, -1LL, -123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("zero: %0llx %0llx %0llx %0llx %0llx\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("zero: %0llX %0llX %0llX %0llX %0llX\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("zero: %0llo %0llo %0llo %0llo %0llo\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("zero: %0llu %0llu %0llu %0llu %0llu\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("zero: %0zd %0zd %0zd %0zd %0zd\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) -123, (ssize_t) 123);
+printf("zero: %0zi %0zi %0zi %0zi %0zi\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) -123, (ssize_t) 123);
+printf("zero: %0zx %0zx %0zx %0zx\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("zero: %0zX %0zX %0zX %0zX\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("zero: %0zo %0zo %0zo %0zo\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("zero: %0zu %0zu %0zu %0zu\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("zero: %0jd %0jd %0jd %0jd %0jd %0jd %0jd\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) -123, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) INTMAX_MIN) ;
+printf("zero: %0ji %0ji %0ji %0ji %0ji %0ji %0ji\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) -123, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) INTMAX_MIN) ;
+printf("zero: %0jx %0jx %0jx %0jx %0jx\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX);
+printf("zero: %0jX %0jX %0jX %0jX %0jX\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX);
+printf("zero: %0jo %0jo %0jo %0jo %0jo\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX);
+printf("zero: %0ju %0ju %0ju %0ju %0ju\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, (intmax_t) INTMAX_MAX, (intmax_t) UINTMAX_MAX);
 
 /* space flag */
 printf("space: % d % d % d % d % d % d % d\n", 0, 1, -1,  123, 123, INT_MAX, INT_MIN);
 printf("space: % i % i % i % i % i % i % i\n", 0, 1, -1,  123, 123, INT_MAX, INT_MIN);
+printf("space: % ld % ld % ld % ld % ld % ld % ld\n", 0L, 1L, -1L,  123L, 123L, LONG_MAX, LONG_MIN);
+printf("space: % li % li % li % li % li % li % li\n", 0L, 1L, -1L,  123L, 123L, LONG_MAX, LONG_MIN);
+printf("space: % lld % lld % lld % lld % lld % lld % lld\n", 0LL, 1LL, -1LL, 123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("space: % lli % lli % lli % lli % lli % lli % lli\n", 0LL, 1LL, -1LL, 123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("space: % zd % zd % zd % zd % zd\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) 123, (ssize_t) 123);
+printf("space: % zi % zi % zi % zi % zi\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) 123, (ssize_t) 123);
+printf("space: % jd % jd % jd % jd % jd % jd % jd\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) 123, (intmax_t) 123, INTMAX_MIN, INTMAX_MAX);
+printf("space: % ji % ji % ji % ji % ji % ji % ji\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) 123, (intmax_t) 123, INTMAX_MIN, INTMAX_MAX);
 
 /* plus flag */
 printf("plus: %+d %+d %+d %+d %+d %+d %+d\n", 0, 1, -1, -123, 123, INT_MAX, INT_MIN);
 printf("plus: %+i %+i %+i %+i %+i %+i %+i\n", 0, 1, -1, -123, 123, INT_MAX, INT_MIN);
+printf("plus: %+ld %+ld %+ld %+ld %+ld %+ld %+ld\n", 0L, 1L, -1L,  123L, 123L, LONG_MAX, LONG_MIN);
+printf("plus: %+li %+li %+li %+li %+li %+li %+li\n", 0L, 1L, -1L,  123L, 123L, LONG_MAX, LONG_MIN);
+printf("plus: %+lld %+lld %+lld %+lld %+lld %+lld %+lld\n", 0LL, 1LL, -1LL, 123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("plus: %+lli %+lli %+lli %+lli %+lli %+lli %+lli\n", 0LL, 1LL, -1LL, 123LL, 123LL, LLONG_MAX, LLONG_MIN);
+printf("plus: %+zd %+zd %+zd %+zd %+zd\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) 123, (ssize_t) 123);
+printf("plus: %+zi %+zi %+zi %+zi %+zi\n", (ssize_t) 0, (ssize_t) 1, (ssize_t) -1, (ssize_t) 123, (ssize_t) 123);
+printf("plus: %+jd %+jd %+jd %+jd %+jd %+jd %+jd\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) 123, (intmax_t) 123, INTMAX_MIN, INTMAX_MAX);
+printf("plus: %+ji %+ji %+ji %+ji %+ji %+ji %+ji\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) -1, (intmax_t) 123, (intmax_t) 123, INTMAX_MIN, INTMAX_MAX);
 
 /* width and alt flag */
 printf("w+alt: %#4x %#5X %#17o\n", 1, INT_MAX, UINT_MAX);
 printf("w+alt: %#2x %#5o %#5X\n", 0, 0, 0);
+printf("w+alt: %#2x %#5o %#5X\n", INT_MAX, 1, 1);
+printf("w+alt: %#2lx %#5lo %#5lX\n", LONG_MAX, 1L, 1L);
+printf("w+alt: %#2llx %#5llo %#5llX\n", LLONG_MAX, 1LL, 1LL);
+printf("w+alt: %#2zx %#5zo %#5zX\n", SIZE_MAX, (size_t) 1, (size_t)1);
+printf("w+alt: %#2jx %#5jo %#5jX\n", INTMAX_MAX, (intmax_t) 1, (intmax_t)1);
 
 /* width and zero flag */
 printf("w+zero: %05d %06d %07d %08d %09d %010d %011d\n", 0, 1, 123, -1, -123, INT_MAX, INT_MIN);
 printf("w+zero: %05i %06i %07i %08i %09i %010i %011i\n", 0, 1, 123, -1, -123, INT_MAX, INT_MIN);
-printf("w+zero: %03x %04x %05x %06x %07x", 0, 1, 123, INT_MAX, UINT_MAX);
-printf("w+zero: %03X %04X %05X %06X %07X", 0, 1, 123, INT_MAX, UINT_MAX);
-printf("w+zero: %03o %04o %05o %06o %07o", 0, 1, 123, INT_MAX, UINT_MAX);
-printf("w+zero: %03u %04u %05u %06u %07u", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("w+zero: %03x %04x %05x %06x %07x\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("w+zero: %03X %04X %05X %06X %07X\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("w+zero: %03o %04o %05o %06o %07o\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("w+zero: %03u %04u %05u %06u %07u\n", 0, 1, 123, INT_MAX, UINT_MAX);
+printf("w+zero: %05ld %06ld %07ld %08ld %09ld %010ld %011ld\n", 0L, 1L, 123L, -1L, -123L, LONG_MAX, LONG_MIN);
+printf("w+zero: %05li %06li %07li %08li %09li %010li %011li\n", 0L, 1L, 123L, -1L, -123L, LONG_MAX, LONG_MIN);
+printf("w+zero: %03lx %04lx %05lx %06lx %07lx\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("w+zero: %03lX %04lX %05lX %06lX %07lX\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("w+zero: %03lo %04lo %05lo %06lo %07lo\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("w+zero: %03lu %04lu %05lu %06lu %07lu\n", 0L, 1L, 123L, LONG_MAX, ULONG_MAX);
+printf("w+zero: %05lld %06lld %07lld %08lld %09lld %010lld %011lld\n", 0LL, 1LL, 123LL, -1LL, -123LL, LLONG_MAX, LLONG_MIN);
+printf("w+zero: %05lli %06lli %07lli %08lli %09lli %010lli %011lli\n", 0LL, 1LL, 123LL, -1LL, -123LL, LLONG_MAX, LLONG_MIN);
+printf("w+zero: %03llx %04llx %05llx %06llx %07llx\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("w+zero: %03llX %04llX %05llX %06llX %07llX\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("w+zero: %03llo %04llo %05llo %06llo %07llo\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("w+zero: %03llu %04llu %05llu %06llu %07llu\n", 0LL, 1LL, 123LL, LLONG_MAX, ULLONG_MAX);
+printf("w+zero: %03zx %04zx %05zx %06zx\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("w+zero: %03zX %04zX %05zX %06zX\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("w+zero: %03zo %04zo %05zo %06zo\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("w+zero: %03zu %04zu %05zu %06zu\n", (size_t) 0, (size_t) 1, (size_t) 123, SIZE_MAX);
+printf("w+zero: %03jx %04jx %05jx %06jx %07jx\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX, INTMAX_MIN);
+printf("w+zero: %03jX %04jX %05jX %06jX %07jX\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX, INTMAX_MIN);
+printf("w+zero: %03jo %04jo %05jo %06jo %07jo\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX, INTMAX_MIN);
+printf("w+zero: %03ju %04ju %05ju %06ju %07ju\n", (intmax_t) 0, (intmax_t) 1, (intmax_t) 123, INTMAX_MAX, INTMAX_MIN);
 printf("w+zero: %0*d %0*d %0*d\n", -1, 0, -1, 123, -12, 1);
+printf("w+zero: %0*ld %0*ld %0*ld\n", -1, 0L, -1, 123L, -12, 1L);
+printf("w+zero: %0*lld %0*lld %0*lld\n", -1, 0LL, -1, 123LL, -12, 1LL);
+printf("w+zero: %0*zd %0*zd %0*zd\n", -1, (size_t) 0, -1, (size_t) 123, -12, (size_t) 1);
+printf("w+zero: %0*jd %0*jd %0*jd\n", -1, (intmax_t) 0, -1, (intmax_t) 123, -12, (intmax_t) 1);
 
 /* width and dash flag */
 printf("w+dash: %-10d %-5x %-7u %-10p\n", 5, 0xfee, UINT_MAX, (void*)17);
