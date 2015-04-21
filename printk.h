@@ -53,16 +53,16 @@
 #  define printk__format(fmt, arg) /* ignore */
 #endif
 
-extern int printk(const char *fmt, ...) printk__format(1, 2);
-extern int fprintk(int fd, const char *fmt, ...) printk__format(2, 3);
-extern int vprintk(const char *fmt, va_list ap);
-extern int vfprintk(int fc, const char *fmt, va_list ap);
+extern int printk(const char *restrict fmt, ...) printk__format(1, 2);
+extern int fprintk(int fd, const char *restrict fmt, ...) printk__format(2, 3);
+extern int vprintk(const char *restrict fmt, va_list ap);
+extern int vfprintk(int fc, const char *restrict fmt, va_list ap);
 
 
-extern int snprintk(char *str, size_t size, const char *fmt, ...) printk__format(3, 4);
-extern int sprintk(char *str, const char *fmt, ...) printk__format(2, 3);
-extern int vsprintk(char *str, const char *fmt, va_list ap);
-extern int vsnprintk(char *str, size_t size, const char *fmt, va_list ap);
+extern int snprintk(char *restrict str, size_t size, const char *restrict fmt, ...) printk__format(3, 4);
+extern int sprintk(char *restrict str, const char *restrict fmt, ...) printk__format(2, 3);
+extern int vsprintk(char *restrict str, const char *restrict fmt, va_list ap);
+extern int vsnprintk(char *restrict str, size_t size, const char *restrict fmt, va_list ap);
 
 
 #endif /* __PRINTK_H__ */

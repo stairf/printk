@@ -275,17 +275,17 @@ static inline int normalize_flags(int flags)
 		while (u) { \
 			utype div = u / BASE; \
 			utype rem = u % BASE; \
-			*ptr++ = rem2digit(rem,(flags & FLAG_UC)); \
+			*ptr++ = rem2digit(rem, (flags & FLAG_UC)); \
 			u = div; \
 		} \
-		/* reversed now contains the reversed representation of val */ \
+		/* numbuf now contains the reversed representation of val */ \
 		int numlen = ptr - numbuf; \
 		/* fill how many bytes to achive width? */ \
 		int nfill = 0; \
 		if (flags & FLAG_WIDTH) { \
 			nfill = (width - numlen); \
 			if ((flags & FLAG_PREC) && numlen < prec) \
-				nfill = (width - prec); \
+				nfill = width - prec; \
 			if (flags & FLAG_ALTERNATIVE) \
 				nfill -= strlen(ALTPFX); \
 			if (negative || (flags & FLAG_SPACE) || (flags & FLAG_PLUS)) \
@@ -308,9 +308,9 @@ static inline int normalize_flags(int flags)
 			push(buf, '+'); \
 		\
 		/* print alternative prefix */ \
-		if ((flags & FLAG_ALTERNATIVE) && (BASE != 8 || (numlen >= prec))) { \
+		if ((flags & FLAG_ALTERNATIVE) && (BASE != 8 || (numlen >= prec))) \
 			pushall(buf, ALTPFX, strlen(ALTPFX)); \
-		} \
+		\
 		if (flags & FLAG_ZERO) { \
 			/* when the padding character is '0', it must be applied _after_ */ \
 			/* the sign char or the alternative prefix                       */ \
@@ -325,9 +325,9 @@ static inline int normalize_flags(int flags)
 		} \
 		/* copy the number from the local buffer to the ouput buffer */ \
 		ptr--; \
-		while (ptr >= numbuf) { \
+		while (ptr >= numbuf) \
 			push(buf, *ptr--); \
-		} \
+		\
 		/* write the remaining fill chars, if required */ \
 		for (int i = 0; i < nfill; ++i) \
 			push(buf, fill_char); \
@@ -434,11 +434,6 @@ static void format_s(buf_t *buf, const char *val, int flags, int width, int prec
 			push(buf, ' ');
 		nfill = 0;
 	}
-	/*
-	for (size_t i = 0; i < len; ++i) {
-		push(buf, val[i]);
-	}
-	*/
 	pushall(buf, val, len);
 	for (int i = 0; i < nfill; ++i) {
 		push(buf, ' ');
@@ -499,7 +494,7 @@ static void format_lln(buf_t *buf, long long int *val, int flags, int width, int
 	} while (0)
 
 // the ``format'' function does all the work
-static inline int format(buf_t *buf, const char *fmt, va_list ap)
+static inline int format(buf_t *buf, const char *restrict fmt, va_list ap)
 {
 	char *nextspec;
 	size_t len;
@@ -688,7 +683,7 @@ static inline int format(buf_t *buf, const char *fmt, va_list ap)
 	return (int) buf->written;
 }
 
-int vfprintk(int fd, const char *fmt, va_list ap)
+int vfprintk(int fd, const char *restrict fmt, va_list ap)
 {
 	// vfprintk ist the standard function for everything that writes to a file
 	char buf_data[WRITE_BUFSZ];
@@ -703,12 +698,12 @@ int vfprintk(int fd, const char *fmt, va_list ap)
 	return format(&fmtbuf, fmt, ap);
 }
 
-int vprintk(const char *fmt, va_list ap)
+int vprintk(const char *restrict fmt, va_list ap)
 {
 	return vfprintk(FD, fmt, ap);
 }
 
-int fprintk(int fd, const char *fmt, ...)
+int fprintk(int fd, const char *restrict fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -718,7 +713,7 @@ int fprintk(int fd, const char *fmt, ...)
 }
 
 
-int printk(const char *fmt, ...)
+int printk(const char *restrict fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -727,7 +722,7 @@ int printk(const char *fmt, ...)
 	return result;
 }
 
-int vsnprintk(char *str, size_t size, const char *fmt, va_list ap)
+int vsnprintk(char *restrict str, size_t size, const char *restrict fmt, va_list ap)
 {
 	buf_t fmtbuf = {
 		.data = str,
@@ -751,12 +746,12 @@ int vsnprintk(char *str, size_t size, const char *fmt, va_list ap)
 	return res;
 }
 
-int vsprintk(char *str, const char *fmt, va_list ap)
+int vsprintk(char *restrict str, const char *restrict fmt, va_list ap)
 {
 	return vsnprintk(str, SIZE_MAX, fmt, ap);
 }
 
-int snprintk(char *str, size_t size, const char *fmt, ...)
+int snprintk(char *restrict str, size_t size, const char *restrict fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
@@ -765,7 +760,7 @@ int snprintk(char *str, size_t size, const char *fmt, ...)
 	return result;
 }
 
-int sprintk(char *str, const char *fmt, ...)
+int sprintk(char *restrict str, const char *restrict fmt, ...)
 {
 	va_list ap;
 	va_start(ap, fmt);
