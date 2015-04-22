@@ -39,7 +39,7 @@
  * do not match the format string.
  */
 #if defined __clang__
-#  if __has_attribute(__format__)
+#  if __has_attribute(format)
 #    define printk__format(fmt,arg)  __attribute__((__format__(__printf__,fmt,arg)))
 #  endif
 #elif defined __GNUC__
