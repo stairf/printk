@@ -426,7 +426,7 @@ static void format_s(buf_t *buf, const char *val, int flags, int width, int prec
 
 	size_t len = (flags & FLAG_PREC) ? strnlen(val, prec) : strlen(val);
 	int nfill = 0;
-	if (width && (size_t) width > len) {
+	if ((flags & FLAG_WIDTH) && (size_t) width > len) {
 		nfill = width - len;
 	}
 	if (!(flags & FLAG_DASH)) {
@@ -444,11 +444,22 @@ static void format_s(buf_t *buf, const char *val, int flags, int width, int prec
 static void format_c(buf_t *buf, int val, int flags, int width, int prec)
 {
 	unsigned char uc = (unsigned char) val;
-	push(buf, uc);
 
-	// ignore unused parameters
-	(void) flags;
-	(void) width;
+	int nfill = 0;
+	if ((flags & FLAG_WIDTH) && (size_t) width > 1) {
+		nfill = width - 1;
+	}
+	if (!(flags & FLAG_DASH)) {
+		for (int i = 0; i < nfill; ++i)
+			push(buf, ' ');
+		nfill = 0;
+	}
+	push(buf, uc);
+	for (int i = 0; i < nfill; ++i) {
+		push(buf, ' ');
+	}
+
+	// ignore unused parameter
 	(void) prec;
 }
 

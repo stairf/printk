@@ -167,6 +167,7 @@ printf("s: he%so\n", "ll");
 printf("s: %s%s%s%s", "fo", "ob", "ar", "\n");
 
 printf("s+w:%1s %2s %10s\n", "", "hello", "world");
+printf("s+w:%*s %*s\n", 10, "foo", -10, "bar");
 printf("s+w+dash:%-1s %-2s %-10s\n", "", "hello", "world");
 printf("s+p:%.1s %.2s %.10s\n", "", "hello", "world");
 printf("s+p+dash:%-.1s %-.2s %-.10s\n", "", "hello", "world");
@@ -177,6 +178,13 @@ printf("s+w+p+dash:%-1.0s %-1.3s %-3.1s %-4.10s %-2.10s\n", "hello", "world", "f
 printf("p:%p\n", (void*)0x1);
 printf("p: %p %p %p\n", (void*)0x1, (void*) 0x02, (void*)UINT_MAX);
 printf("p: %p\n", (void *)-1);
+
+/* %c conversion */
+printf("c: %c %c\n", 'a', 'B');
+printf("c: %c %c\n", 0x7f, 0xff);
+printf("c+w: %0c %1c %2c\n", 'a', 'b', 'c');
+printf("c+w+dash: %-0c %-1c %-5c\n", 'A', 'B', 'C');
+printf("c+w: %*c %*c %*c\n", 1, 'X', -2, 'Y', -5, 'Z');
 
 /* width */
 printf("w: %10s\n", "hello");
