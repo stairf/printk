@@ -181,15 +181,6 @@ static inline void pushall(buf_t *buf, const char *begin, size_t n)
 // write one char to the buffer
 static inline void push(buf_t *buf, char x)
 {
-	/*
-	buf->data[buf->idx++] = (x);
-	if (buf->idx == buf->size) {
-		if (write(buf->fd, buf->data, buf->size) < 0)
-			buf->flags |= BUF_ERROR
-		buf->written += buf->size;
-		buf->idx = 0;
-	}
-	*/
 	pushall(buf, &x, 1);
 }
 
@@ -333,37 +324,6 @@ static inline int normalize_flags(int flags)
 			push(buf, fill_char); \
 	}
 
-/*
-FMT_FUNCTION(d, 1, 10, int, unsigned int, "",   FLAG_NUMERIC)
-FMT_FUNCTION(u, 0, 10, int, unsigned int, "",   FLAG_NUMERIC)
-FMT_FUNCTION(x, 0, 16, int, unsigned int, "0x", FLAG_NUMERIC)
-FMT_FUNCTION(X, 0, 16, int, unsigned int, "0X", FLAG_NUMERIC | FLAG_UC)
-FMT_FUNCTION(o, 0,  8, int, unsigned int, "0",  FLAG_NUMERIC)
-
-FMT_FUNCTION(ld, 1, 10, long, unsigned long, "",   FLAG_NUMERIC)
-FMT_FUNCTION(lu, 0, 10, long, unsigned long, "",   FLAG_NUMERIC)
-FMT_FUNCTION(lx, 0, 16, long, unsigned long, "0x", FLAG_NUMERIC)
-FMT_FUNCTION(lX, 0, 16, long, unsigned long, "0X", FLAG_NUMERIC | FLAG_UC)
-FMT_FUNCTION(lo, 0,  8, long, unsigned long, "0",  FLAG_NUMERIC)
-
-FMT_FUNCTION(lld, 1, 10, long long, unsigned long long, "",   FLAG_NUMERIC)
-FMT_FUNCTION(llu, 0, 10, long long, unsigned long long, "",   FLAG_NUMERIC)
-FMT_FUNCTION(llx, 0, 16, long long, unsigned long long, "0x", FLAG_NUMERIC)
-FMT_FUNCTION(llX, 0, 16, long long, unsigned long long, "0X", FLAG_NUMERIC | FLAG_UC)
-FMT_FUNCTION(llo, 0,  8, long long, unsigned long long, "0",  FLAG_NUMERIC)
-
-FMT_FUNCTION(zd, 1, 10, ssize_t, size_t, "",   FLAG_NUMERIC)
-FMT_FUNCTION(zu, 0, 10, ssize_t, size_t, "",   FLAG_NUMERIC)
-FMT_FUNCTION(zx, 0, 16, ssize_t, size_t, "0x", FLAG_NUMERIC)
-FMT_FUNCTION(zX, 0, 16, ssize_t, size_t, "0X", FLAG_NUMERIC | FLAG_UC)
-FMT_FUNCTION(zo, 0,  8, ssize_t, size_t, "0",  FLAG_NUMERIC)
-
-FMT_FUNCTION(td, 1, 10, ptrdiff_t, size_t, "",   FLAG_NUMERIC)
-FMT_FUNCTION(tu, 0, 10, ptrdiff_t, size_t, "",   FLAG_NUMERIC)
-FMT_FUNCTION(tx, 0, 16, ptrdiff_t, size_t, "0x", FLAG_NUMERIC)
-FMT_FUNCTION(tX, 0, 16, ptrdiff_t, size_t, "0X", FLAG_NUMERIC | FLAG_UC)
-FMT_FUNCTION(to, 0,  8, ptrdiff_t, size_t, "0",  FLAG_NUMERIC)
-*/
 
 FMT_FUNCTION(jd, 1, 10, intmax_t, uintmax_t, "",   FLAG_NUMERIC)
 FMT_FUNCTION(ju, 0, 10, intmax_t, uintmax_t, "",   FLAG_NUMERIC)
@@ -499,7 +459,7 @@ static void format_lln(buf_t *buf, long long int *val, int flags, int width, int
 	(void) prec;
 }
 
-// implicitly pass bufm flags, width, and prec to the format functions
+// implicitly pass buf, flags, width, and prec to the format functions
 #define convert(format_func,type) do { \
 		format_func(buf, va_arg(ap, type), flags, width, prec); \
 	} while (0)
