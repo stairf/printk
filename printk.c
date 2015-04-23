@@ -571,15 +571,15 @@ static inline int format(buf_t *buf, const char *restrict fmt, va_list ap)
 				// %t conversions
 				fmt++;
 				if (*fmt == 'd' || *fmt == 'i') {
-					convert(format_td, ssize_t);
+					convert(format_td, ptrdiff_t);
 				} else if (*fmt == 'u') {
-					convert(format_tu, ssize_t);
+					convert(format_tu, ptrdiff_t);
 				} else if (*fmt == 'x') {
-					convert(format_tx, ssize_t);
+					convert(format_tx, ptrdiff_t);
 				} else if (*fmt == 'X') {
-					convert(format_tX, ssize_t);
+					convert(format_tX, ptrdiff_t);
 				} else if (*fmt == 'o') {
-					convert(format_to, ssize_t);
+					convert(format_to, ptrdiff_t);
 				}
 			} else if (*fmt == 'j') {
 				// %j conversions
