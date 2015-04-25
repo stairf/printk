@@ -58,7 +58,6 @@
  */
 #define WRITE_BUFSZ 1024
 #define FD          1
-#define INVAL_FD    (-1)
 
 /*
  * simple libc re-implementation
@@ -128,6 +127,7 @@ static inline int my_isdigit(int c)
 
 // define buffer flag bits
 #define BUF_ERROR          0x01
+#define BUF_NOFLUSH        0x02
 
 // internal data structure for an output buffer
 typedef struct buf {
@@ -142,12 +142,11 @@ typedef struct buf {
 // flush the local buffer
 static inline void flush(buf_t *buf)
 {
-	if (buf->fd >= 0 && !(buf->flags & BUF_ERROR)) {
-		if (buf->idx && (write(buf->fd, buf->data, buf->idx) < 0))
-			buf->flags |= BUF_ERROR;
-		buf->idx = 0;
-	}
-	buf->written += buf->idx;
+	if (buf->flags & (BUF_ERROR | BUF_NOFLUSH))
+		return;
+	if (buf->idx && (write(buf->fd, buf->data, buf->idx) < 0))
+		buf->flags |= BUF_ERROR;
+	buf->idx = 0;
 }
 
 // write multiple characters to the buffer
@@ -155,6 +154,14 @@ static inline void pushall(buf_t *buf, const char *begin, size_t n)
 {
 	size_t avail = buf->size - buf->idx;
 	size_t min;
+
+	/*
+	 * the data is not written yet but it is safe to update the variable before
+	 * printing the data because only the %n/%ln/%lln conversions and the
+	 * return value depend on its value.
+	 */
+	buf->written += n;
+
 	if (n < avail) {
 		memcpy(buf->data + buf->idx, begin, n);
 		buf->idx += n;
@@ -699,8 +706,7 @@ int vsnprintk(char *restrict str, size_t size, const char *restrict fmt, va_list
 		.size = size,
 		.idx = 0,
 		.written = 0,
-		.flags = 0,
-		.fd = INVAL_FD
+		.flags = BUF_NOFLUSH,
 	};
 	int res = format(&fmtbuf, fmt, ap);
 	if (res < 0)

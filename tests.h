@@ -469,4 +469,13 @@ printf("w +zero +space: %0 +*i %0 +1i %0 +5i %0 +7i %0 +11i %0 +5i %0 +12i %0 +1
 printf("w+zero+space: %-+*d %-+1d %-+5d %-+7d %-+11d %-+5d %-+12d %-+13d\n", 0, 0, 1, 123, INT_MAX, INT_MIN, INT_MAX, INT_MIN, -1);
 printf("w+zero+space: %-+*i %-+1i %-+5i %-+7i %-+11i %-+5i %-+12i %-+13i\n", 0, 0, 1, 123, INT_MAX, INT_MIN, INT_MAX, INT_MIN, -1);
 
+/* %n conversion: only really verified by [f]printk, not s[n]printk */
+int _n1, _n2, _n3;
+long _n4, _n5;
+long long _n6;
+printf("n: x%nx%nx%nx%lnx%llx\n", &_n1, &_n2, &_n3, &_n4, &_n6);
+printf("n: %d:%d:%d:%ld:%lld\n", _n1, _n2, _n3, _n4, _n6);
+printf("n: %2000d%ln\n", 0, &_n5);
+printf("n: %ld\n", _n5);
+
 /* TODO */
