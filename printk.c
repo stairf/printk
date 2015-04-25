@@ -43,7 +43,6 @@
  * and argument indexing using $. However, it aims to be portable and
  * reentrant, and to minimize library dependencies.
  */
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 #include <limits.h>
