@@ -53,11 +53,13 @@
 
 /*
  * printk configuration:
- *  - WRITE_BUFSZ : output buffer size, on stack
- *  - FD          : the default file descriptor used by printk/vprintk
+ *  - WRITE_BUFSZ   : output buffer size, on stack
+ *  - FD            : the default file descriptor used by printk/vprintk
+ *  - WANT_FORMAT_N : enable %n, %ln, and %lln conversion
  */
 #define WRITE_BUFSZ 1024
 #define FD          1
+//#define WANT_FORMAT_N 1
 
 /*
  * simple libc re-implementation
@@ -429,6 +431,8 @@ static void format_c(buf_t *buf, int val, int flags, int width, int prec)
 	(void) prec;
 }
 
+#ifdef WANT_FORMAT_N
+
 // handle %n conversions
 static void format_n(buf_t *buf, int *val, int flags, int width, int prec)
 {
@@ -464,6 +468,8 @@ static void format_lln(buf_t *buf, long long int *val, int flags, int width, int
 	(void) width;
 	(void) prec;
 }
+
+#endif /* WANT_FORMAT_N */
 
 // implicitly pass buf, flags, width, and prec to the format functions
 #define convert(format_func,type) do { \
@@ -557,8 +563,10 @@ static inline int format(buf_t *buf, const char *restrict fmt, va_list ap)
 				convert(format_s, char *);
 			} else if (*fmt == 'c') {
 				convert(format_c, int);
+#ifdef WANT_FORMAT_N
 			} else if (*fmt == 'n') {
 				convert(format_n, int *);
+#endif /* WANT_FORMAT_N */
 			} else if (*fmt == 'z') {
 				// %z conversions
 				fmt++;
@@ -614,8 +622,10 @@ static inline int format(buf_t *buf, const char *restrict fmt, va_list ap)
 					convert(format_lX, long);
 				} else if (*fmt == 'o') {
 					convert(format_lo, long);
+#ifdef WANT_FORMAT_N
 				} else if (*fmt == 'n') {
 					convert(format_ln, long int *);
+#endif /* WANT_FORMAT_N */
 				} else if( *fmt == 'l' ) {
 					 // %ll conversions
 					fmt++;
@@ -629,8 +639,10 @@ static inline int format(buf_t *buf, const char *restrict fmt, va_list ap)
 						convert(format_llX, long long);
 					} else if (*fmt == 'o') {
 						convert(format_llo, long long);
+#ifdef WANT_FORMAT_N
 					} else if (*fmt == 'n') {
 						convert(format_lln, long long int *);
+#endif /* WANT_FORMAT_N */
 					}
 				}
 			} else {
