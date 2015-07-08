@@ -64,12 +64,14 @@ static void xgetline(char **lptr, size_t *nptr, FILE *stream)
 static void do_test_str(size_t bufsz, const char *fmt, ...)
 {
 	va_list ap;
+	va_list ap2;
 	va_start(ap, fmt);
+	va_copy(ap2, ap);
 	char libc[bufsz];
 	char test[bufsz];
 
 	vsnprintf(libc, bufsz, fmt, ap);
-	vsnprintk(test, bufsz, fmt, ap);
+	vsnprintk(test, bufsz, fmt, ap2);
 
 	if (strcmp(libc, test))
 		fprintf(stderr, "[str:%zu] error\n\tlibc='%s'\n\ttest='%s'\n", bufsz, libc, test);
